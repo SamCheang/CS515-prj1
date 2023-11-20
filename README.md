@@ -6,19 +6,23 @@
 - GitHub Repo URL: https://github.com/s-inu/CS515-prj1
 
 ## Time Spent
-- Estimated hours spent on the project: 12 hrs
+- Estimated hours spent on the project: 14 hrs
 
 ## Testing
 - Description of how the code was tested:
-  ==[Provide a detailed explanation of your testing approach, including any automated tests, manual testing procedures, and the types of test cases you focused on.]==
+  - create some example files, and manually run and compare them
+  
 
 ## Known Bugs and Issues
-- List of any known bugs or issues that were not resolved:
-  ==[Provide a list of any bugs or issues in the code that you identified but could not resolve. Include as much detail as possible about each item.]==
+- N/A
 
 ## Difficult Issues and Resolutions
-- Example of a difficult issue or bug and how it was resolved:
-  ==[Describe a specific challenging issue or bug you encountered during development. Explain how you identified the problem and the steps you took to resolve it.]==
+- wc
+  - no-args means every args is True
+    - made control flow in main()
+
+- different source, from args or STDIN
+  - make default as `stdin`
 
 ## Implemented Extensions
 1. **Extension 1**: wc-multiple files
