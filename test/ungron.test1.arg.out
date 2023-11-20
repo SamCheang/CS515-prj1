@@ -1,0 +1,20 @@
+{
+  "json": {
+    "json": {},
+    "menu": {
+      "menu": {},
+      "id": {
+        "id": "file"
+      },
+      "popup": {
+        "popup": {},
+        "menuitem": {
+          "menuitem": []
+        }
+      },
+      "value": {
+        "value": "File"
+      }
+    }
+  }
+}

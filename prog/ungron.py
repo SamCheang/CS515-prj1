@@ -3,30 +3,33 @@ import json
 from sys import stdin
 import re
 
-
 def ungron(groned: str) -> dict:
     def parse_path(path):
         keys = re.findall(r"\w+|\[\d+\]", path)
         return [int(key[1:-1]) if key.startswith("[") else key for key in keys]
 
+    def ensure_structure(data, key, is_last_key):
+        if isinstance(key, int):
+            if not isinstance(data, list):
+                return [None] * key + [{} if is_last_key else []]
+            while len(data) <= key:
+                data.append(None)
+            if data[key] is None or (is_last_key and not isinstance(data[key], dict)):
+                data[key] = {} if is_last_key else []
+            return data[key]
+        else:
+            if not isinstance(data, dict):
+                data = {k: data[k] for k in range(len(data))} if isinstance(data, list) else {}
+            if key not in data or (is_last_key and not isinstance(data[key], dict)):
+                data[key] = {}
+            return data[key]
+
     def merge(data, keys, value):
         for key in keys[:-1]:
-            if isinstance(key, int):
-                while len(data) <= key:
-                    data.append({})
-                if not isinstance(data[key], dict):
-                    data[key] = {}
-            else:
-                if key not in data:
-                    data[key] = {}
-                data = data[key]
+            data = ensure_structure(data, key, False)
         last_key = keys[-1]
-        if isinstance(last_key, int):
-            while len(data) <= last_key:
-                data.append(None)
-            data[last_key] = value
-        else:
-            data[last_key] = value
+        last_data = ensure_structure(data, last_key, True)
+        last_data[last_key] = value
 
     result = {}
     lines = [line for line in groned.split("\n") if line.strip() != ""]
@@ -38,7 +41,6 @@ def ungron(groned: str) -> dict:
         merge(result, keys, value)
 
     return result
-
 
 if __name__ == "__main__":
     ungroned = ungron(stdin.read())
